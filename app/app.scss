@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.es_simulator {
+  .building {
+    width: 80vmin;
+    height: 80vmin;
+
+    border: 1px solid red;
+    overflow: hidden;
+    position: relative;
+
+    .floor {
+      border-top: 1px solid blue;
+      &:first-child {
+        border-top: 0;
+      }
+      width: 100%;
+    }
+
+    .elevator {
+      position: absolute;
+      background-color: #888;
+      &:hover {
+        cursor: pointer;
+      }
+      &.selected {
+        background-color: #0b97c4;
+      }
+    }
+  }
+
+  .control {
+    height: 20vmin;
+    background-color: red;
+  }
+}

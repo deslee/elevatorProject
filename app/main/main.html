@@ -1,0 +1,19 @@
+<div class="es_simulator">
+    <div class="building">
+        <div class="floor" ng-style="floorStyle" ng-repeat="floor in floors.slice().reverse()">
+            {{floor.id}}
+        </div>
+
+        <div ng-click="clicked(elevator)" ng-class="{selected: selectedElevator.id == elevator.id}" class="elevator" ng-style="getElevatorStyle(elevator)" ng-repeat="elevator in elevators">
+           {{elevator.id}}
+        </div>
+    </div>
+
+    <div class="control">
+        Selected elevator: {{selectedElevatorId}}
+        <form ng-submit="controlFloor(form)">
+            <input type="number" ng-model="form.floor"/>
+            <button type="submit">Go to floor</button>
+        </form>
+    </div>
+</div>
