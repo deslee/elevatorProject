@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('elevatorproject-main', ['ngRoute', 'es_module'])
+angular.module('elevatorproject-main', ['ngRoute', 'es_services'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
@@ -8,31 +8,34 @@ angular.module('elevatorproject-main', ['ngRoute', 'es_module'])
                 controller: 'MainCtrl'
             });
     })
-    .controller('MainCtrl', function ($scope, es_models) {
-        angular.extend($scope, es_models);
+    .controller('MainCtrl', function ($scope, Simulator, $interval) {
+        var models = Simulator.models;
+        angular.extend($scope, models);
 
-        $scope.selectedElevator = es_models.elevators[0];
-
+        $scope.selectedElevator = models.elevators[0];
         $scope.floorStyle = {
-            height: '-webkit-calc(' + 100 / es_models.floors.length + '%' + ' - 1px)'
+            height: '-webkit-calc(' + 100 / models.floors.length + '%' + ' - 1px)'
         };
-
         $scope.getElevatorStyle = function (elevator) {
             return {
-                bottom: 100 / es_models.floors.length * elevator.floor + '%',
-                height: 100 / es_models.floors.length + '%',
-                left: '-webkit-calc(' + 100 / es_models.elevators.length * elevator.id + '% + ' + (25 / es_models.elevators.length) + '%)'
+                //bottom: 100 / models.floors.length * (elevator.floor.id + elevator.transition/100) + '%',
+                height: 100 / models.floors.length + 100 / models.floors.length * (elevator.floor.id + elevator.transition/100) + '%',
+                //height: 100 / models.floors.length + '%',
+                left: '-webkit-calc(' + 100 / models.elevators.length * elevator.id + '% + ' + (25 / models.elevators.length) + '%)'
             }
         };
-
+        $scope.getPersonStyle = function(person) {
+            return {
+                bottom: 100 / models.floors.length * (person.floor.id) + '%',
+                left: person.transition + '%'
+            }
+        };
         $scope.clicked = function (elevator) {
             $scope.selectedElevator = elevator;
         };
 
         $scope.controlFloor = function (form) {
-            var elevator = $scope.selectedElevator;
-            elevator.floor += .1;
-            console.log(elevator);
+            Simulator.dispatchElevatorToFloor($scope.selectedElevator, models.floors[form.floor]);
         };
 
     });

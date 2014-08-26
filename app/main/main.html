@@ -4,14 +4,19 @@
             {{floor.id}}
         </div>
 
-        <div ng-click="clicked(elevator)" ng-class="{selected: selectedElevator.id == elevator.id}" class="elevator" ng-style="getElevatorStyle(elevator)" ng-repeat="elevator in elevators">
-           {{elevator.id}}
+        <div class="elevator" ng-click="clicked(elevator)" ng-class="{selected: selectedElevator.id == elevator.id}" ng-style="getElevatorStyle(elevator)" ng-repeat="elevator in elevators">
+            <img src="img/longcat.png" class="elev_head">
+            <img src="img/longcatbod.png" class="elev_body" style="width: 100%">
+        </div>
+
+        <div class="person" ng-style="getPersonStyle(person)" ng-repeat="person in people">
+            {{person.id}}
         </div>
     </div>
 
     <div class="control">
-        Selected elevator: {{selectedElevatorId}}
-        <form ng-submit="controlFloor(form)">
+        Selected elevator: {{selectedElevator.id}}
+        <form ng-submit="controlFloor(form)" ng-init="form.floor=0">
             <input type="number" ng-model="form.floor"/>
             <button type="submit">Go to floor</button>
         </form>
