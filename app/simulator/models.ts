@@ -38,14 +38,12 @@ module Models {
     var floors:Floor[] = [];
 
     export class Elevator extends SimulatedObject {
-        public floor:Floor;
         public transition:number;
         public direction:Direction;
         public queue:Floor[];
 
-        constructor(id:number) {
+        constructor(id:number, public floor: Floor) {
             super(id);
-            this.floor = floors[0];
             this.direction = Direction.stopped;
             this.queue = [];
         }
@@ -82,7 +80,8 @@ module Models {
             floors[i] = new Floor(i);
         }
         for (var i = 0; i < options.numElevators; i++) {
-            elevators[i] = new Elevator(i);
+            var randomFloor = floors[Math.floor(options.numFloors * Math.random())];
+            elevators[i] = new Elevator(i, randomFloor);
         }
         for (var i = 0; i < options.numPeople; ++i) {
             var randomFloor = floors[Math.floor(options.numFloors * Math.random())];

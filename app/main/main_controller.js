@@ -30,6 +30,10 @@ angular.module('elevatorproject-main', ['ngRoute', 'es_services'])
                 left: person.transition + '%'
             }
         };
+        $scope.getPersonClass = function(person) {
+          return ['state'+(Math.floor(person.transition) % 2 + 1), person.walkingDirection == -1 ? 'backwards' : 'forwards'];
+        };
+
         $scope.clicked = function (elevator) {
             $scope.selectedElevator = elevator;
         };
@@ -37,5 +41,4 @@ angular.module('elevatorproject-main', ['ngRoute', 'es_services'])
         $scope.controlFloor = function (form) {
             Simulator.dispatchElevatorToFloor($scope.selectedElevator, models.floors[form.floor]);
         };
-
     });

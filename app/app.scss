@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
 }
+
 .es_simulator {
   .building {
     width: 80vmin;
@@ -37,21 +38,45 @@
         margin: 0;
       }
 
+      object {
+        width: 100%;
+      }
+
+      .elev_head {
+      }
+
       .elev_body {
         position: relative;
         top: -5%;
         height: 100%;
+        background: url('img/longcatbod.svg');
+        background-size: 100%;
       }
     }
 
     .person {
+      -webkit-transition: 0s;
       position: absolute;
-      width: 2.5%;
-      height: 3.5%;
-      background-color: blue;
+      width: 29px;
+      background-repeat: no-repeat;
+      height: 28px;
       color: white;
       font-size: 90%;
       text-align: center;
+      background-size: 100%;
+
+      &.forwards {
+        -webkit-transform: scaleX(-1);
+      }
+
+      &.state1 {
+        background: url('img/cat1.png');
+        background-repeat: no-repeat;
+      }
+      &.state2 {
+        background: url('img/cat2.png');
+        background-repeat: no-repeat;
+      }
     }
   }
 

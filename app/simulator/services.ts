@@ -8,9 +8,9 @@ module Services {
     declare var angular;
 
     Models.initialize({
-        numElevators: 4,
-        numFloors: 20,
-        numPeople: 100
+        numElevators: 2,
+        numFloors: 10,
+        numPeople: 20
     });
 
     export class Simulator {
@@ -40,7 +40,7 @@ module Services {
 
         public tick() {
             this.handleElevators();
-            //this.handlePeople();
+            this.handlePeople();
         }
 
         public handleElevators() {

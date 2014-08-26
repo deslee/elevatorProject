@@ -5,12 +5,16 @@
         </div>
 
         <div class="elevator" ng-click="clicked(elevator)" ng-class="{selected: selectedElevator.id == elevator.id}" ng-style="getElevatorStyle(elevator)" ng-repeat="elevator in elevators">
-            <img src="img/longcat.png" class="elev_head">
-            <img src="img/longcatbod.png" class="elev_body" style="width: 100%">
+            <div style="
+                width: 100%;
+                height: 100%;
+                position: absolute;
+            "></div>
+            <object class="elev_head" preserveAspectRatio="none" type="image/svg+xml" data="img/longcat.svg">derr</object>
+            <div class="elev_body"></div>
         </div>
 
-        <div class="person" ng-style="getPersonStyle(person)" ng-repeat="person in people">
-            {{person.id}}
+        <div class="person" ng-class="getPersonClass(person)" ng-style="getPersonStyle(person)" ng-repeat="person in people">
         </div>
     </div>
 

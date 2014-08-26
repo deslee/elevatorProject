@@ -42,9 +42,9 @@ var Models;
 
     var Elevator = (function (_super) {
         __extends(Elevator, _super);
-        function Elevator(id) {
+        function Elevator(id, floor) {
             _super.call(this, id);
-            this.floor = floors[0];
+            this.floor = floor;
             this.direction = 2 /* stopped */;
             this.queue = [];
         }
@@ -83,7 +83,8 @@ var Models;
             floors[i] = new Floor(i);
         }
         for (var i = 0; i < options.numElevators; i++) {
-            elevators[i] = new Elevator(i);
+            var randomFloor = floors[Math.floor(options.numFloors * Math.random())];
+            elevators[i] = new Elevator(i, randomFloor);
         }
         for (var i = 0; i < options.numPeople; ++i) {
             var randomFloor = floors[Math.floor(options.numFloors * Math.random())];
