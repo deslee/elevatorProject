@@ -35,6 +35,12 @@ var Models;
         function Floor(id) {
             _super.call(this, id);
         }
+        Floor.prototype.elevatorsOnFloor = function () {
+            var _this = this;
+            return Models.models.elevators.filter(function (elevator) {
+                return elevator.floor.id == _this.id;
+            });
+        };
         return Floor;
     })(SimulatedObject);
     Models.Floor = Floor;

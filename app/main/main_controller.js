@@ -25,9 +25,14 @@ angular.module('elevatorproject-main', ['ngRoute', 'es_services'])
             }
         };
         $scope.getPersonStyle = function(person) {
+            var leftStyle = function() {
+                if (person.state == 0) {
+                    return person.transition + '%'
+                }
+            };
             return {
                 bottom: 100 / models.floors.length * (person.floor.id) + '%',
-                left: person.transition + '%'
+                left: leftStyle()
             }
         };
         $scope.getPersonClass = function(person) {
@@ -38,7 +43,7 @@ angular.module('elevatorproject-main', ['ngRoute', 'es_services'])
             $scope.selectedElevator = elevator;
         };
 
-        $scope.controlFloor = function (form) {
-            Simulator.dispatchElevatorToFloor($scope.selectedElevator, models.floors[form.floor]);
+        $scope.controlFloor = function (floor) {
+            Simulator.dispatchElevatorToFloor($scope.selectedElevator, floor);
         };
     });

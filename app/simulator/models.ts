@@ -34,6 +34,12 @@ module Models {
         constructor(id:number) {
             super(id);
         }
+
+        public elevatorsOnFloor() : Elevator[] {
+            return models.elevators.filter((elevator) => {
+                return elevator.floor.id == this.id;
+            });
+        }
     }
     var floors:Floor[] = [];
 
@@ -52,6 +58,7 @@ module Models {
 
     export class Person extends SimulatedObject {
         public transition:Number;
+        public transitionElevator:Number;
         public elevator:Elevator;
         public state:PersonState;
         public walkingDirection:Number;

@@ -10,7 +10,7 @@ module Services {
     Models.initialize({
         numElevators: 2,
         numFloors: 10,
-        numPeople: 20
+        numPeople: 10
     });
 
     export class Simulator {
@@ -66,8 +66,6 @@ module Services {
                         e.transition = 0;
 
                         e.floor = this.floors[e.floor.id + (e.direction == Models.Direction.down ? -1 : 1)];
-                        console.log(e.floor.id);
-                        console.log(e.queue[0].id);
 
                         if (e.floor.id == e.queue[0].id) {
                             e.direction = Models.Direction.stopped;
@@ -86,10 +84,12 @@ module Services {
 
         public handlePeople() {
             this.people.forEach((person: Models.Person) => {
-                person.transition = person.transition + (0.01 * person.walkingDirection);
-                if (person.transition >= 100 || person.transition <= 0) {
-                    console.log("EDGE");
-                    person.walkingDirection = person.walkingDirection * -1;
+                if (person.state == Models.PersonState.onFloor) {
+                    person.transition = person.transition + (0.01 * person.walkingDirection);
+                    if (person.transition >= 100 || person.transition <= 0) {
+                        person.transition = person.transition >= 100 ? 100 : 0;
+                        person.walkingDirection = person.walkingDirection * -1;
+                    }
                 }
             })
         }

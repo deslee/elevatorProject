@@ -1,19 +1,29 @@
+$building_color: #8E001C;
+$floor_color: #424242;
+$elevator_selected: #8E001C;
+
 * {
   margin: 0;
   padding: 0;
 }
 
+body {
+  background-color: #FBF7E4;
+  margin: 0 1em;
+}
+
 .es_simulator {
   .building {
+    margin-bottom: 1em;
     width: 80vmin;
     height: 80vmin;
-
-    border: 1px solid red;
+    background-color: #fff;
+    border: 1px solid $building_color;
     overflow: hidden;
     position: relative;
 
     .floor {
-      border-top: 1px solid blue;
+      border-top: 1px solid $floor_color;
       &:first-child {
         border-top: 0;
       }
@@ -27,7 +37,7 @@
         cursor: pointer;
       }
       &.selected {
-        border-top: 2px dotted red;
+        border: 1px dashed $elevator_selected;
       }
       width: 10%;
       text-align: center;
@@ -82,6 +92,13 @@
 
   .control {
     height: 20vmin;
-    background-color: red;
+    color: #8E001C;
+    button {
+      &:first-child {
+        margin-left:0;
+      }
+      margin: 1em;
+      padding: 1em;
+    }
   }
 }
